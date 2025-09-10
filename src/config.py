@@ -52,16 +52,7 @@ SPRITE_COORDS = {
     'snake_head_left': (2, 3),    # 4th row, 3rd tile
     'snake_head_down': (3, 3),    # 4th row, 4th tile
     'snake_head_right': (4, 3),   # 4th row, 5th tile
-    'snake_body_horizontal': (5, 3),  # 4th row, 6th tile (snake body)
-    'snake_body_vertical': (5, 3),    # Same as horizontal for now
-    'snake_body_corner_tl': (5, 3),   # Using body sprite for corners
-    'snake_body_corner_tr': (5, 3),
-    'snake_body_corner_bl': (5, 3),
-    'snake_body_corner_br': (5, 3),
-    'snake_tail_up': (5, 3),      # Using head sprites for tail
-    'snake_tail_down': (5, 3),
-    'snake_tail_left': (5, 3),
-    'snake_tail_right': (5, 3),
+    'snake_body': (5, 3),         # 4th row, 6th tile (unified body sprite for all variants and tail)
     
     # Food sprites (4th row)
     'food': (6, 3),               # 4th row, 7th tile (cherry)
@@ -71,14 +62,13 @@ SPRITE_COORDS = {
     'background': (0, 3),         # 4th row, 1st tile (empty)
     
     # Wall sprites
-    'wall_top_corner': (12, 0),    # Top corners (left and right)
-    'wall_bottom_corner': (13, 0), # Bottom corners (left and right)
-    'wall_left': (8, 2),           # Left side border
-    'wall_right': (9, 2),          # Right side border
-    'wall_top': (7, 2),            # Top side border
-    'wall_bottom': (10, 2),        # Bottom side border
-    'wall_inside': (0, 1),         # Inside wall area
-    'wall': (0, 1),                # Default wall (inside)
+    'wall_corner': (12, 0),       # Unified corner sprite for all corners
+    'wall_left': (8, 2),          # Left side border
+    'wall_right': (9, 2),         # Right side border
+    'wall_top': (7, 2),           # Top side border
+    'wall_bottom': (10, 2),       # Bottom side border
+    'wall_inside': (0, 1),        # Inside wall area
+    'wall': (0, 1),               # Default wall (inside)
 }
 
 # Movement directions

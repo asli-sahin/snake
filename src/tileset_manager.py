@@ -129,37 +129,29 @@ class TilesetManager:
             print(f"⚠ Warning: Unknown direction {direction}")
             return self.get_sprite('snake_head_right')  # Default fallback
     
-    def get_snake_body_sprite(self, body_type: str) -> Optional[pygame.Surface]:
+    def get_snake_body_sprite(self, body_type: str = None) -> Optional[pygame.Surface]:
         """
-        Get snake body sprite based on body segment type.
+        Get snake body sprite. Now uses a unified sprite for all body types.
         
         Args:
-            body_type: Type of body segment ('horizontal', 'vertical', 'corner_tl', etc.)
+            body_type: Type of body segment (ignored - kept for compatibility)
             
         Returns:
             pygame.Surface containing the body sprite
         """
-        sprite_name = f'snake_body_{body_type}'
-        return self.get_sprite(sprite_name)
+        return self.get_sprite('snake_body')
     
-    def get_snake_tail_sprite(self, direction: Tuple[int, int]) -> Optional[pygame.Surface]:
+    def get_snake_tail_sprite(self, direction: Tuple[int, int] = None) -> Optional[pygame.Surface]:
         """
-        Get snake tail sprite based on movement direction.
+        Get snake tail sprite. Uses the same sprite as snake body.
         
         Args:
-            direction: Tuple representing direction (x, y)
+            direction: Tuple representing direction (ignored - kept for compatibility)
             
         Returns:
-            pygame.Surface containing the tail sprite
+            pygame.Surface containing the tail sprite (same as body sprite)
         """
-        from config import DIRECTION_TO_SPRITE
-        
-        sprite_name = DIRECTION_TO_SPRITE.get(direction)
-        if sprite_name:
-            tail_sprite_name = sprite_name.replace('head', 'tail')
-            return self.get_sprite(tail_sprite_name)
-        else:
-            return self.get_sprite('snake_tail_right')  # Default fallback
+        return self.get_sprite('snake_body')
     
     def get_food_sprite(self) -> Optional[pygame.Surface]:
         """Get the food sprite."""
@@ -172,6 +164,10 @@ class TilesetManager:
     def get_wall_sprite(self) -> Optional[pygame.Surface]:
         """Get the wall sprite."""
         return self.get_sprite('wall')
+    
+    def get_wall_corner_sprite(self) -> Optional[pygame.Surface]:
+        """Get the wall corner sprite (unified for all corners)."""
+        return self.get_sprite('wall_corner')
     
     def scale_sprite(self, sprite: pygame.Surface, scale_factor: int) -> pygame.Surface:
         """

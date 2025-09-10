@@ -510,8 +510,7 @@ class SnakeGame:
             return
         
         # Get wall sprites and scale them
-        wall_top_corner = self.tileset_manager.get_sprite('wall_top_corner')
-        wall_bottom_corner = self.tileset_manager.get_sprite('wall_bottom_corner')
+        wall_corner = self.tileset_manager.get_wall_corner_sprite()
         wall_left = self.tileset_manager.get_sprite('wall_left')
         wall_right = self.tileset_manager.get_sprite('wall_right')
         wall_top = self.tileset_manager.get_sprite('wall_top')
@@ -519,10 +518,8 @@ class SnakeGame:
         wall_inside = self.tileset_manager.get_sprite('wall_inside')
         
         # Scale sprites to cell size
-        if wall_top_corner:
-            wall_top_corner = pygame.transform.scale(wall_top_corner, (self.cell_size, self.cell_size))
-        if wall_bottom_corner:
-            wall_bottom_corner = pygame.transform.scale(wall_bottom_corner, (self.cell_size, self.cell_size))
+        if wall_corner:
+            wall_corner = pygame.transform.scale(wall_corner, (self.cell_size, self.cell_size))
         if wall_left:
             wall_left = pygame.transform.scale(wall_left, (self.cell_size, self.cell_size))
         if wall_right:
@@ -532,15 +529,12 @@ class SnakeGame:
         if wall_bottom:
             wall_bottom = pygame.transform.scale(wall_bottom, (self.cell_size, self.cell_size))
         
-        # Render top corners (left and right) - walls start at position 2
-        if wall_top_corner:
-            self.screen.blit(wall_top_corner, (self.grid_offset_x + self.wall_start_x * self.cell_size, self.grid_offset_y + self.wall_start_y * self.cell_size))  # Top-left
-            self.screen.blit(wall_top_corner, (self.grid_offset_x + (self.wall_start_x + self.playable_width + 1) * self.cell_size, self.grid_offset_y + self.wall_start_y * self.cell_size))  # Top-right
-        
-        # Render bottom corners (left and right)
-        if wall_bottom_corner:
-            self.screen.blit(wall_bottom_corner, (self.grid_offset_x + self.wall_start_x * self.cell_size, self.grid_offset_y + (self.wall_start_y + self.playable_height + 1) * self.cell_size))  # Bottom-left
-            self.screen.blit(wall_bottom_corner, (self.grid_offset_x + (self.wall_start_x + self.playable_width + 1) * self.cell_size, self.grid_offset_y + (self.wall_start_y + self.playable_height + 1) * self.cell_size))  # Bottom-right
+        # Render corners (all four corners using unified sprite)
+        if wall_corner:
+            self.screen.blit(wall_corner, (self.grid_offset_x + self.wall_start_x * self.cell_size, self.grid_offset_y + self.wall_start_y * self.cell_size))  # Top-left
+            self.screen.blit(wall_corner, (self.grid_offset_x + (self.wall_start_x + self.playable_width + 1) * self.cell_size, self.grid_offset_y + self.wall_start_y * self.cell_size))  # Top-right
+            self.screen.blit(wall_corner, (self.grid_offset_x + self.wall_start_x * self.cell_size, self.grid_offset_y + (self.wall_start_y + self.playable_height + 1) * self.cell_size))  # Bottom-left
+            self.screen.blit(wall_corner, (self.grid_offset_x + (self.wall_start_x + self.playable_width + 1) * self.cell_size, self.grid_offset_y + (self.wall_start_y + self.playable_height + 1) * self.cell_size))  # Bottom-right
         
         # Render left side border
         if wall_left:
